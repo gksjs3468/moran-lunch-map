@@ -193,65 +193,63 @@ export default function AdminDashboard({
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col font-sans pb-16 relative">
       {/* 관리자 헤더 */}
-      <header className="sticky top-0 z-30 bg-slate-950/90 backdrop-blur-md border-b border-slate-800 px-4 lg:px-8 py-3.5">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
+      <header className="sticky top-0 z-30 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2 sm:gap-4">
+          {/* 좌측: 복귀 및 로고 */}
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
             <button
               onClick={onCloseAdmin}
-              className="p-2 hover:bg-slate-800 rounded-xl text-slate-400 hover:text-white transition flex items-center gap-1 text-sm font-medium"
+              className="p-1.5 sm:p-2 hover:bg-slate-800 rounded-xl text-slate-400 hover:text-white transition flex items-center gap-1 text-xs sm:text-sm font-medium shrink-0"
               title="사용자 화면으로 돌아가기"
             >
               <ChevronLeft className="w-5 h-5" />
               <span className="hidden sm:inline">사용자 뷰로 복귀</span>
             </button>
-            <div className="h-5 w-px bg-slate-800 hidden sm:block" />
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-sm border border-orange-500/30">
+            <div className="h-4 w-px bg-slate-800 hidden sm:block" />
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-xs sm:text-sm border border-orange-500/30 shrink-0">
                 ⚙️
               </div>
-              <div>
-                <h1 className="text-base sm:text-lg font-bold text-white tracking-tight flex items-center gap-2">
-                  <span>모란 점심 관리자 대시보드</span>
-                  <span className="text-[10px] bg-orange-500/20 text-orange-300 font-semibold px-2 py-0.5 rounded-full border border-orange-500/30">
-                    DB 영구 연동
+              <div className="min-w-0">
+                <h1 className="text-sm sm:text-lg font-bold text-white tracking-tight flex items-center gap-1.5 truncate">
+                  <span>모란 점심 관리자</span>
+                  <span className="text-[10px] bg-orange-500/20 text-orange-300 font-semibold px-1.5 py-0.2 rounded-full border border-orange-500/30 hidden xs:inline shrink-0">
+                    DB
                   </span>
                 </h1>
-                <p className="text-xs text-slate-400 hidden sm:block">
-                  식당/메뉴 DB 영구 관리 및 사용자 수정 요청 승인
-                </p>
               </div>
             </div>
           </div>
 
-          {/* 우측 액션 버튼들 */}
-          <div className="flex items-center gap-2">
+          {/* 우측 액션 버튼들 (핵심 버튼 위주 노출, 모바일 최적화) */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={() => setShowTelegramModal(true)}
-              className="p-2 sm:px-3 sm:py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-medium border border-slate-700 transition flex items-center gap-1.5"
+              className="p-2 sm:px-3 sm:py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-medium border border-slate-700 transition flex items-center gap-1"
               title="텔레그램 제보 알림 설정"
             >
-              <Bell className="w-4 h-4 text-sky-400" />
+              <Bell className="w-4 h-4 text-sky-400 shrink-0" />
               <span className="hidden md:inline">텔레그램 알림</span>
             </button>
 
             <button
               onClick={() => setShowAddModal(true)}
-              className="flex items-center gap-1.5 px-3.5 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs sm:text-sm font-bold shadow-lg shadow-orange-500/20 transition active:scale-95"
+              className="flex items-center gap-1 px-2.5 sm:px-3.5 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-xl text-xs sm:text-sm font-bold shadow-lg shadow-orange-500/20 transition active:scale-95 shrink-0"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-4 h-4 shrink-0" />
               <span>식당 추가</span>
             </button>
 
             <button
               onClick={storageService.exportToJson}
-              className="p-2 sm:px-3 sm:py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-medium border border-slate-700 transition flex items-center gap-1.5"
+              className="hidden sm:flex p-2 sm:px-3 sm:py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-medium border border-slate-700 transition items-center gap-1.5"
               title="JSON 백업 다운로드"
             >
               <Download className="w-4 h-4 text-emerald-400" />
               <span className="hidden md:inline">백업(JSON)</span>
             </button>
 
-            <label className="p-2 sm:px-3 sm:py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-medium border border-slate-700 transition cursor-pointer flex items-center gap-1.5">
+            <label className="hidden sm:flex p-2 sm:px-3 sm:py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-medium border border-slate-700 transition cursor-pointer items-center gap-1.5">
               <Upload className="w-4 h-4 text-sky-400" />
               <span className="hidden md:inline">불러오기</span>
               <input
@@ -264,7 +262,7 @@ export default function AdminDashboard({
 
             <button
               onClick={handleReset}
-              className="p-2 bg-slate-800 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 rounded-xl border border-slate-700 hover:border-rose-800/50 transition"
+              className="hidden sm:block p-2 bg-slate-800 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 rounded-xl border border-slate-700 hover:border-rose-800/50 transition"
               title="기본 데이터로 초기화"
             >
               <RotateCcw className="w-4 h-4" />
@@ -272,7 +270,7 @@ export default function AdminDashboard({
 
             <button
               onClick={onLogout}
-              className="p-2 sm:px-3 sm:py-2 bg-slate-800 hover:bg-rose-950/40 text-slate-300 hover:text-rose-400 rounded-xl text-xs font-bold border border-slate-700 hover:border-rose-800/50 transition flex items-center gap-1.5"
+              className="p-2 sm:px-3 sm:py-2 bg-slate-800 hover:bg-rose-950/40 text-slate-300 hover:text-rose-400 rounded-xl text-xs font-bold border border-slate-700 hover:border-rose-800/50 transition flex items-center gap-1 shrink-0"
               title="관리자 로그아웃"
             >
               <LogOut className="w-4 h-4 text-rose-400" />
@@ -280,77 +278,103 @@ export default function AdminDashboard({
             </button>
           </div>
         </div>
+
+        {/* 모바일 전용 보조 툴바 (JSON 백업, 불러오기, 초기화) */}
+        <div className="flex sm:hidden items-center justify-between gap-1.5 pt-2 mt-2 border-t border-slate-850 text-xs">
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={storageService.exportToJson}
+              className="px-2 py-1 bg-slate-850 hover:bg-slate-800 text-slate-300 rounded-lg border border-slate-800 flex items-center gap-1 text-[11px]"
+            >
+              <Download className="w-3.5 h-3.5 text-emerald-400" />
+              <span>백업</span>
+            </button>
+            <label className="px-2 py-1 bg-slate-850 hover:bg-slate-800 text-slate-300 rounded-lg border border-slate-800 flex items-center gap-1 text-[11px] cursor-pointer">
+              <Upload className="w-3.5 h-3.5 text-sky-400" />
+              <span>불러오기</span>
+              <input type="file" accept=".json" onChange={handleFileImport} className="hidden" />
+            </label>
+            <button
+              onClick={handleReset}
+              className="px-2 py-1 bg-slate-850 hover:bg-rose-950/30 text-slate-400 hover:text-rose-400 rounded-lg border border-slate-800 flex items-center gap-1 text-[11px]"
+            >
+              <RotateCcw className="w-3 h-3" />
+              <span>초기화</span>
+            </button>
+          </div>
+          <span className="text-[10px] text-slate-500 font-medium">관리자 전용</span>
+        </div>
       </header>
 
       {/* 메인 컨텐츠 영역 */}
-      <main className="max-w-7xl mx-auto w-full px-4 lg:px-8 mt-6 space-y-6">
-        {/* 통계 카드 그리드 */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4">
-          <div className="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 flex flex-col justify-between">
-            <span className="text-xs font-medium text-slate-400">총 등록 식당</span>
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-2xl sm:text-3xl font-extrabold text-white tabular-nums">{stats.total}</span>
-              <span className="text-xs text-slate-400">곳</span>
+      <main className="max-w-7xl mx-auto w-full px-3 sm:px-6 lg:px-8 mt-4 sm:mt-6 space-y-4 sm:space-y-6">
+        {/* 통계 카드 그리드 (모바일 2열 정돈 + 요청 카드 풀너비) */}
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-2.5 sm:gap-4">
+          <div className="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-3 sm:p-4 flex flex-col justify-between">
+            <span className="text-[11px] sm:text-xs font-medium text-slate-400">총 등록 식당</span>
+            <div className="mt-1 sm:mt-2 flex items-baseline gap-1.5">
+              <span className="text-xl sm:text-3xl font-extrabold text-white tabular-nums">{stats.total}</span>
+              <span className="text-[11px] sm:text-xs text-slate-400">곳</span>
             </div>
           </div>
 
-          <div className="bg-slate-800/80 border border-orange-500/30 rounded-2xl p-4 flex flex-col justify-between bg-gradient-to-br from-orange-500/10 to-transparent">
+          <div className="bg-slate-800/80 border border-orange-500/30 rounded-2xl p-3 sm:p-4 flex flex-col justify-between bg-gradient-to-br from-orange-500/10 to-transparent">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-orange-300">검증 TOP 14</span>
-              <Sparkles className="w-4 h-4 text-orange-400" />
+              <span className="text-[11px] sm:text-xs font-medium text-orange-300">검증 TOP 14</span>
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-400" />
             </div>
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-2xl sm:text-3xl font-extrabold text-orange-400 tabular-nums">{stats.topPicks}</span>
-              <span className="text-xs text-orange-300/80">곳</span>
-            </div>
-          </div>
-
-          <div className="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 flex flex-col justify-between">
-            <span className="text-xs font-medium text-slate-400">9천원 이하 메뉴</span>
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-2xl sm:text-3xl font-extrabold text-emerald-400 tabular-nums">{stats.budgetMenus}</span>
-              <span className="text-xs text-slate-400">/ {stats.totalMenus}개</span>
+            <div className="mt-1 sm:mt-2 flex items-baseline gap-1.5">
+              <span className="text-xl sm:text-3xl font-extrabold text-orange-400 tabular-nums">{stats.topPicks}</span>
+              <span className="text-[11px] sm:text-xs text-orange-300/80">곳</span>
             </div>
           </div>
 
-          <div className="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-4 flex flex-col justify-between">
-            <span className="text-xs font-medium text-slate-400">등록 식당 평균가</span>
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-2xl sm:text-3xl font-extrabold text-white tabular-nums">
+          <div className="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-3 sm:p-4 flex flex-col justify-between">
+            <span className="text-[11px] sm:text-xs font-medium text-slate-400">9천원 이하 메뉴</span>
+            <div className="mt-1 sm:mt-2 flex items-baseline gap-1.5">
+              <span className="text-xl sm:text-3xl font-extrabold text-emerald-400 tabular-nums">{stats.budgetMenus}</span>
+              <span className="text-[10px] sm:text-xs text-slate-400">/ {stats.totalMenus}개</span>
+            </div>
+          </div>
+
+          <div className="bg-slate-800/80 border border-slate-700/80 rounded-2xl p-3 sm:p-4 flex flex-col justify-between">
+            <span className="text-[11px] sm:text-xs font-medium text-slate-400">등록 식당 평균가</span>
+            <div className="mt-1 sm:mt-2 flex items-baseline gap-1.5">
+              <span className="text-xl sm:text-3xl font-extrabold text-white tabular-nums">
                 {stats.avgPrice.toLocaleString()}
               </span>
-              <span className="text-xs text-slate-400">원</span>
+              <span className="text-[11px] sm:text-xs text-slate-400">원</span>
             </div>
           </div>
 
-          {/* 접수된 수정 요청 카드 */}
+          {/* 접수된 수정 요청 카드 (모바일에서는 2열 가로폭 전체 차지) */}
           <button
             onClick={() => setSelectedTab('requests')}
-            className={`border rounded-2xl p-4 flex flex-col justify-between text-left transition ${
+            className={`col-span-2 lg:col-span-1 border rounded-2xl p-3 sm:p-4 flex flex-col justify-between text-left transition ${
               stats.pendingCount > 0
                 ? 'bg-amber-950/40 border-amber-500/50 hover:bg-amber-900/40 animate-pulse'
                 : 'bg-slate-800/80 border-slate-700/80'
             }`}
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-amber-300">사용자 제보 요청</span>
-              <Inbox className="w-4 h-4 text-amber-400" />
+              <span className="text-[11px] sm:text-xs font-bold text-amber-300">사용자 제보 요청</span>
+              <Inbox className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
             </div>
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-2xl sm:text-3xl font-extrabold text-amber-400 tabular-nums">
+            <div className="mt-1 sm:mt-2 flex items-baseline gap-1.5">
+              <span className="text-xl sm:text-3xl font-extrabold text-amber-400 tabular-nums">
                 {stats.pendingCount}
               </span>
-              <span className="text-xs text-amber-300/80">건 대기중</span>
+              <span className="text-[11px] sm:text-xs text-amber-300/80">건 대기중</span>
             </div>
           </button>
         </div>
 
-        {/* 탭 네비게이션 */}
-        <div className="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
-          <div className="flex items-center gap-2">
+        {/* 탭 네비게이션 (모바일 가로 스크롤 지원) */}
+        <div className="border-b border-slate-800 pb-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto pb-1 no-scrollbar">
             <button
               onClick={() => setSelectedTab('all')}
-              className={`px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition ${
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition ${
                 selectedTab === 'all'
                   ? 'bg-orange-500 text-white shadow-md'
                   : 'bg-slate-800 text-slate-400 hover:text-white'
@@ -360,18 +384,18 @@ export default function AdminDashboard({
             </button>
             <button
               onClick={() => setSelectedTab('verified')}
-              className={`px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition flex items-center gap-1.5 ${
                 selectedTab === 'verified'
                   ? 'bg-orange-500 text-white shadow-md'
                   : 'bg-slate-800 text-slate-400 hover:text-white'
               }`}
             >
-              <Sparkles className="w-4 h-4 text-amber-300" />
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
               <span>직접 검증 ({stats.topPicks})</span>
             </button>
             <button
               onClick={() => setSelectedTab('unverified')}
-              className={`px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition flex items-center gap-1.5 ${
                 selectedTab === 'unverified'
                   ? 'bg-amber-600 text-white shadow-md'
                   : 'bg-slate-800 text-slate-400 hover:text-white'
@@ -381,14 +405,14 @@ export default function AdminDashboard({
             </button>
             <button
               onClick={() => setSelectedTab('requests')}
-              className={`px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition flex items-center gap-1.5 ${
                 selectedTab === 'requests'
                   ? 'bg-amber-500 text-slate-950 shadow-md font-black'
                   : 'bg-slate-800 text-slate-400 hover:text-white'
               }`}
             >
-              <Inbox className="w-4 h-4" />
-              <span>사용자 제보 ({pendingRequests.length})</span>
+              <Inbox className="w-3.5 h-3.5" />
+              <span>제보 ({stats.pendingCount})</span>
             </button>
           </div>
         </div>
@@ -604,8 +628,8 @@ export default function AdminDashboard({
                         </div>
                       </div>
 
-                      {/* 액션 버튼 */}
-                      <div className="flex items-center gap-2 self-end md:self-center shrink-0">
+                      {/* 액션 버튼 그룹 (모바일 반응형 최적화) */}
+                      <div className="flex items-center gap-1.5 sm:gap-2 w-full md:w-auto justify-end pt-2.5 md:pt-0 border-t md:border-t-0 border-slate-800/80 shrink-0 flex-wrap">
                         {item.needsVerification && (
                           <button
                             onClick={() => handleMarkAsVerified(item)}
@@ -613,34 +637,34 @@ export default function AdminDashboard({
                             title="관리자 현장 확인 완료 상태로 변경"
                           >
                             <Check className="w-3.5 h-3.5" />
-                            <span>검증 완료 전환</span>
+                            <span>검증 전환</span>
                           </button>
                         )}
 
                         <button
                           onClick={() => handleToggleTopPick(item)}
-                          className={`p-2 rounded-xl border text-xs font-medium transition flex items-center gap-1 ${
+                          className={`px-2.5 py-1.5 rounded-xl border text-xs font-medium transition flex items-center gap-1 ${
                             isVerified
                               ? 'bg-orange-500/20 border-orange-500/40 text-orange-300'
                               : 'bg-slate-800 border-slate-700 text-slate-400 hover:text-white'
                           }`}
                           title="TOP 픽 추천 토글"
                         >
-                          <Sparkles className="w-4 h-4" />
-                          <span className="hidden sm:inline">추천</span>
+                          <Sparkles className="w-3.5 h-3.5" />
+                          <span>{isVerified ? '추천해제' : '추천'}</span>
                         </button>
 
                         <button
                           onClick={() => setEditingRestaurant(item)}
-                          className="px-3.5 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5 active:scale-95"
+                          className="px-3 py-1.5 sm:px-3.5 sm:py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1 active:scale-95"
                         >
                           <Edit3 className="w-3.5 h-3.5" />
-                          <span>DB 즉시 수정</span>
+                          <span>DB 수정</span>
                         </button>
 
                         <button
                           onClick={() => handleDelete(item.id, item.name)}
-                          className="p-2 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 rounded-xl border border-transparent hover:border-rose-900/40 transition"
+                          className="p-1.5 sm:p-2 hover:bg-rose-950/40 text-slate-400 hover:text-rose-400 rounded-xl border border-transparent hover:border-rose-900/40 transition"
                           title="식당 삭제"
                         >
                           <Trash2 className="w-4 h-4" />

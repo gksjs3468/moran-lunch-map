@@ -162,7 +162,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex flex-col h-screen w-full bg-stone-100 text-stone-800 overflow-hidden font-sans">
+    <div className="flex flex-col h-[100dvh] w-full bg-stone-100 text-stone-800 overflow-hidden font-sans">
       {/* 1. 글로벌 헤더 */}
       <header className="bg-white border-b border-stone-200/90 px-3.5 sm:px-6 py-2.5 flex items-center justify-between shrink-0 z-30 shadow-xs">
         {/* 로고 & 슬로건 */}
@@ -257,7 +257,7 @@ export default function App() {
   </div>
 
       {/* 3. 본문 레이아웃 (반응형: 데스크톱=Split View, 모바일=Tab View) */}
-      <div className="flex-1 flex overflow-hidden relative">
+      <div className="flex-1 flex overflow-hidden relative min-h-0">
         {/* 좌측 사이드바: 검색, 필터, 리스트 (모바일에서는 mobileTab === 'list'일 때만 표시) */}
         <aside
           className={`
@@ -462,33 +462,43 @@ export default function App() {
 
           {/* 모바일 지도 모드일 때 하단에 플로팅되는 선택된 식당 요약 카드 */}
           {selectedRestaurant && (
-            <div className="md:hidden absolute bottom-3 left-3 right-3 z-30 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-2xl border border-stone-200/90 animate-in fade-in slide-in-from-bottom duration-200">
-              <div className="flex items-start justify-between">
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-sm font-black text-stone-900">
+            <div className="md:hidden absolute bottom-4 left-3 right-3 z-30 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-2xl border border-stone-200/90 animate-in fade-in slide-in-from-bottom duration-200 mb-[env(safe-area-inset-bottom)]">
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="text-sm font-black text-stone-900 truncate">
                       {selectedRestaurant.name}
                     </span>
-                    <span className="text-[10px] px-1.5 py-0.5 bg-stone-100 text-stone-600 rounded font-semibold">
+                    <span className="text-[10px] px-1.5 py-0.5 bg-stone-100 text-stone-600 rounded font-semibold shrink-0">
                       {selectedRestaurant.category}
                     </span>
                     {(selectedRestaurant.verifiedByUser || selectedRestaurant.isTopPick) && (
-                      <span className="text-[10px] font-bold px-1.5 py-0.5 bg-orange-100 text-orange-800 rounded">
+                      <span className="text-[10px] font-bold px-1.5 py-0.5 bg-orange-100 text-orange-800 rounded shrink-0">
                         ⭐ 검증
                       </span>
                     )}
-              </div>
-                  <p className="text-xs text-stone-500 mt-0.5">
+                  </div>
+                  <p className="text-xs text-stone-500 mt-0.5 truncate">
                     {selectedRestaurant.address}
                   </p>
-            </div>
-                <button
-                  onClick={() => setShowMobileDetailModal(true)}
-                  className="px-3 py-1.5 bg-stone-900 text-white rounded-xl text-xs font-bold shrink-0 shadow-xs"
-                >
-                  상세보기
-                </button>
-          </div>
+                </div>
+
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <button
+                    onClick={() => setShowMobileDetailModal(true)}
+                    className="px-3 py-1.5 bg-stone-900 text-white rounded-xl text-xs font-bold shadow-xs active:scale-95 transition"
+                  >
+                    상세보기
+                  </button>
+                  <button
+                    onClick={() => setSelectedRestaurant(null)}
+                    className="p-1.5 text-stone-400 hover:text-stone-700 rounded-lg hover:bg-stone-100"
+                    title="카드 닫기"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
 
               {/* 9천원 메뉴 요약 또는 메뉴 미등록 안내 */}
               <div className="flex flex-wrap items-center gap-1 mt-2">
@@ -509,8 +519,8 @@ export default function App() {
                     💡 메뉴 정보 미등록 (제보 대기)
                   </span>
                 )}
-          </div>
-        </div>
+              </div>
+            </div>
           )}
         </main>
 

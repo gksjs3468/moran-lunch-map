@@ -2,9 +2,24 @@ import React, { useState } from 'react';
 import { Sparkles, Dice5, X, CheckCircle, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-export default function LunchRoulette({ restaurants, budgetLimit, onClose, onSelect }) {
+export default function LunchRoulette({
+  restaurants = [],
+  budgetLimit = 9000,
+  onClose = () => {},
+  onSelect,
+  onSelectRestaurant
+}) {
   const [isSpinning, setIsSpinning] = useState(false);
   const [winner, setWinner] = useState(null);
+
+  const handleSelectWinner = (rest) => {
+    if (onSelectRestaurant) {
+      onSelectRestaurant(rest);
+    } else if (onSelect) {
+      onSelect(rest);
+    }
+    onClose();
+  };
 
   // 9,000원 이하 메뉴가 있는 식당만 후보로 추림
   const candidates = restaurants.filter((r) =>
@@ -99,11 +114,8 @@ export default function LunchRoulette({ restaurants, budgetLimit, onClose, onSel
 
           {winner && !isSpinning && (
             <button
-              onClick={() => {
-                onSelect(winner);
-                onClose();
-              }}
-              className="w-full py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-2xl transition text-xs flex items-center justify-center gap-1"
+              onClick={() => handleSelectWinner(winner)}
+              className="w-full py-2.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold rounded-2xl transition text-xs flex items-center justify-center gap-1 border border-emerald-200"
             >
               <span>이 식당 위치 확인하기</span>
               <ArrowRight className="w-3.5 h-3.5" />

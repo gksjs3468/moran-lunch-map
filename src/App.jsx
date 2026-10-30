@@ -534,7 +534,7 @@ export default function App() {
 
       {/* 모바일 전용 상세 모달 */}
       {showMobileDetailModal && selectedRestaurant && (
-        <div className="md:hidden fixed inset-0 z-50 flex flex-col justify-end bg-black/60 backdrop-blur-xs p-3">
+        <div className="md:hidden fixed inset-0 z-[999999] flex flex-col justify-end bg-black/75 backdrop-blur-md p-3 animate-in fade-in duration-200">
           <div className="max-h-[85vh] h-auto overflow-hidden rounded-3xl">
             <RestaurantDetail
               restaurant={selectedRestaurant}
@@ -607,7 +607,7 @@ export default function App() {
 
       {/* 가격 변동 히스토리 모달 */}
       {showHistoryModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs p-4">
+        <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/75 backdrop-blur-md p-4 animate-in fade-in duration-200">
           <div className="bg-white rounded-3xl p-5 max-w-lg w-full shadow-2xl border border-stone-200">
             <div className="flex items-center justify-between pb-3 border-b border-stone-100">
               <div className="flex items-center gap-2">

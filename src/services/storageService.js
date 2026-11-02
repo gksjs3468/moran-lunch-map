@@ -1,10 +1,123 @@
 import { INITIAL_RESTAURANTS } from '../data/initialRestaurants';
 import { telegramService } from './telegramService';
 
-const STORAGE_KEY = 'moran_lunch_restaurants_v2';
+const STORAGE_KEY = 'moran_lunch_restaurants_v4';
 const HISTORY_KEY = 'moran_lunch_price_history_v1';
 const CLIENT_ID_KEY = 'naver_map_client_id_v1';
 const REQUESTS_KEY = 'moran_lunch_requests_v1';
+const MEAL_TICKETS_KEY = 'moran_lunch_meal_tickets_v1';
+const MEAL_LOGS_KEY = 'moran_lunch_meal_logs_v1';
+
+export const INITIAL_MEAL_TICKETS = [
+  {
+    id: 'ticket-1',
+    name: '김민수',
+    department: '개발팀',
+    totalCount: 20,
+    usedCount: 4,
+    remainingCount: 16,
+    pricePerTicket: 9000,
+    recentRestaurant: '우본관',
+    recentUseDate: '2026-11-02 12:30',
+    memo: '11월 정기 지급',
+    createdAt: '2026-11-01'
+  },
+  {
+    id: 'ticket-2',
+    name: '이지은',
+    department: '기획팀',
+    totalCount: 20,
+    usedCount: 7,
+    remainingCount: 13,
+    pricePerTicket: 9000,
+    recentRestaurant: '미나리풍년쭈꾸미',
+    recentUseDate: '2026-11-01 12:15',
+    memo: '11월 정기 지급',
+    createdAt: '2026-11-01'
+  },
+  {
+    id: 'ticket-3',
+    name: '박준호',
+    department: '디자인팀',
+    totalCount: 20,
+    usedCount: 18,
+    remainingCount: 2,
+    pricePerTicket: 9000,
+    recentRestaurant: '쿠니라멘 성남점',
+    recentUseDate: '2026-11-02 13:00',
+    memo: '잔여 2장 (소진 임박)',
+    createdAt: '2026-11-01'
+  },
+  {
+    id: 'ticket-4',
+    name: '최유진',
+    department: '운영팀',
+    totalCount: 20,
+    usedCount: 10,
+    remainingCount: 10,
+    pricePerTicket: 9000,
+    recentRestaurant: '홍콩반점0410 모란시장점',
+    recentUseDate: '2026-11-02 11:50',
+    memo: '11월 정기 지급',
+    createdAt: '2026-11-01'
+  },
+  {
+    id: 'ticket-5',
+    name: '정태양',
+    department: '마케팅팀',
+    totalCount: 20,
+    usedCount: 20,
+    remainingCount: 0,
+    pricePerTicket: 9000,
+    recentRestaurant: '시골추어탕매운탕',
+    recentUseDate: '2026-11-02 12:40',
+    memo: '식권 전액 소진 (추가 충전 요망)',
+    createdAt: '2026-11-01'
+  }
+];
+
+export const INITIAL_MEAL_LOGS = [
+  {
+    id: 'log-1',
+    memberId: 'ticket-1',
+    memberName: '김민수',
+    department: '개발팀',
+    restaurantName: '우본관',
+    usedAt: '2026-11-02 12:30',
+    count: 1,
+    memo: '점심특선 육회 비빔밥'
+  },
+  {
+    id: 'log-2',
+    memberId: 'ticket-3',
+    memberName: '박준호',
+    department: '디자인팀',
+    restaurantName: '쿠니라멘 성남점',
+    usedAt: '2026-11-02 13:00',
+    count: 1,
+    memo: '돈코츠 라멘'
+  },
+  {
+    id: 'log-3',
+    memberId: 'ticket-4',
+    memberName: '최유진',
+    department: '운영팀',
+    restaurantName: '홍콩반점0410 모란시장점',
+    usedAt: '2026-11-02 11:50',
+    count: 1,
+    memo: '짜장면'
+  },
+  {
+    id: 'log-4',
+    memberId: 'ticket-5',
+    memberName: '정태양',
+    department: '마케팅팀',
+    restaurantName: '시골추어탕매운탕',
+    usedAt: '2026-11-02 12:40',
+    count: 1,
+    memo: '소한마리탕'
+  }
+];
 
 export const storageService = {
   // 1. 식당 목록 동기식 가져오기 (초기 렌더링용 로컬 캐시)
@@ -273,5 +386,108 @@ export const storageService = {
 
   saveNaverClientId: (id) => {
     localStorage.setItem(CLIENT_ID_KEY, id.trim());
+  },
+
+  // ===================== [식권 명단 관리 API & LocalStorage] =====================
+  // 식권 명단 조회
+  getMealTickets: () => {
+    try {
+      const data = localStorage.getItem(MEAL_TICKETS_KEY);
+      if (!data) {
+        localStorage.setItem(MEAL_TICKETS_KEY, JSON.stringify(INITIAL_MEAL_TICKETS));
+        return INITIAL_MEAL_TICKETS;
+      }
+      return JSON.parse(data);
+    } catch (e) {
+      console.error('Failed to load meal tickets from localStorage', e);
+      return INITIAL_MEAL_TICKETS;
+    }
+  },
+
+  // 서버 DB에서 식권 목록 비동기 동기화
+  fetchMealTicketsFromDb: async () => {
+    try {
+      const res = await fetch('/api/db/meal-tickets');
+      if (res.ok) {
+        const list = await res.json();
+        if (Array.isArray(list) && list.length > 0) {
+          localStorage.setItem(MEAL_TICKETS_KEY, JSON.stringify(list));
+          return list;
+        }
+      }
+    } catch (err) {
+      console.warn('API DB fetchMealTickets failed, fallback to local storage:', err.message);
+    }
+    return storageService.getMealTickets();
+  },
+
+  // 식권 명단 전체 저장
+  saveMealTickets: (tickets) => {
+    try {
+      localStorage.setItem(MEAL_TICKETS_KEY, JSON.stringify(tickets));
+      fetch('/api/db/meal-tickets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(tickets),
+      }).catch((e) => console.warn('DB meal-tickets sync failed:', e.message));
+    } catch (e) {
+      console.error('Failed to save meal tickets to localStorage', e);
+    }
+  },
+
+  // 식권 사용 기록 조회
+  getMealLogs: () => {
+    try {
+      const data = localStorage.getItem(MEAL_LOGS_KEY);
+      if (!data) {
+        localStorage.setItem(MEAL_LOGS_KEY, JSON.stringify(INITIAL_MEAL_LOGS));
+        return INITIAL_MEAL_LOGS;
+      }
+      return JSON.parse(data);
+    } catch {
+      return INITIAL_MEAL_LOGS;
+    }
+  },
+
+  // 서버 DB에서 사용 기록 동기화
+  fetchMealLogsFromDb: async () => {
+    try {
+      const res = await fetch('/api/db/meal-logs');
+      if (res.ok) {
+        const list = await res.json();
+        if (Array.isArray(list) && list.length > 0) {
+          localStorage.setItem(MEAL_LOGS_KEY, JSON.stringify(list));
+          return list;
+        }
+      }
+    } catch (err) {
+      console.warn('API DB fetchMealLogs failed:', err.message);
+    }
+    return storageService.getMealLogs();
+  },
+
+  // 식권 1회 사용 기록 추가
+  addMealLog: (logEntry) => {
+    const logs = storageService.getMealLogs();
+    const newEntry = {
+      id: `log-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+      usedAt: new Date().toLocaleString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }),
+      ...logEntry,
+    };
+    const updated = [newEntry, ...logs].slice(0, 100);
+    localStorage.setItem(MEAL_LOGS_KEY, JSON.stringify(updated));
+    fetch('/api/db/meal-logs', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newEntry),
+    }).catch(() => {});
+    return updated;
   },
 };

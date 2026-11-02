@@ -198,7 +198,7 @@ async function run() {
   console.log(`\n✨ 총 ${scrapedList.length}개의 모란역 신규 후보 식당을 발굴했습니다! (확인 필요 상태로 등록)`);
 
   // 3. 최종 병합:
-  // 1위: 사용자 직접 검증 맛집 (14곳)
+  // 1위: 사용자 직접 검증 맛집
   // 2위: 기존 확인된 식당들
   // 3위: 새로 스크랩된 후보 식당들
   const finalRestaurants = [...userVerifiedMap.values()];
@@ -230,7 +230,7 @@ async function run() {
 
   // 5. src/data/initialRestaurants.js 에도 동기화 저장
   const targetPath = path.resolve(__dirname, '../src/data/initialRestaurants.js');
-  const fileOutput = `// 모란역 인근 점심 맛집 데이터 (사용자 검증 TOP 14 + 네이버 스크랩 데이터)
+  const fileOutput = `// 모란역 인근 점심 맛집 데이터 (사용자 검증 맛집 + 네이버 스크랩 데이터)
 // 모란역 중심 좌표: 37.432145, 127.129088
 // 최종 수집 일시: ${new Date().toISOString()}
 

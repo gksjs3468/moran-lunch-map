@@ -182,6 +182,50 @@ export function jsonDbPlugin() {
           return sendJson(res, 200, { success: true, request });
         }
 
+        // 9. GET /api/db/meal-tickets (식권 명단 조회)
+        if (url === '/api/db/meal-tickets' && req.method === 'GET') {
+          const db = readDb();
+          return sendJson(res, 200, db.mealTickets || []);
+        }
+
+        // 10. POST /api/db/meal-tickets (식권 명단 전체 저장 또는 업데이트)
+        if (url === '/api/db/meal-tickets' && req.method === 'POST') {
+          const body = await parseBody(req);
+          const db = readDb();
+          if (Array.isArray(body)) {
+            db.mealTickets = body;
+          } else if (body && body.id) {
+            const index = (db.mealTickets || []).findIndex(m => m.id === body.id);
+            if (index !== -1) {
+              db.mealTickets[index] = body;
+            } else {
+              db.mealTickets = [body, ...(db.mealTickets || [])];
+            }
+          }
+          writeDb(db);
+          return sendJson(res, 200, { success: true, mealTickets: db.mealTickets });
+        }
+
+        // 11. GET /api/db/meal-logs (식권 사용 기록 조회)
+        if (url === '/api/db/meal-logs' && req.method === 'GET') {
+          const db = readDb();
+          return sendJson(res, 200, db.mealLogs || []);
+        }
+
+        // 12. POST /api/db/meal-logs (식권 사용 기록 추가)
+        if (url === '/api/db/meal-logs' && req.method === 'POST') {
+          const body = await parseBody(req);
+          const db = readDb();
+          const newLog = {
+            id: `log-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+            ...body,
+            usedAt: body.usedAt || new Date().toLocaleString('ko-KR')
+          };
+          db.mealLogs = [newLog, ...(db.mealLogs || [])];
+          writeDb(db);
+          return sendJson(res, 201, { success: true, log: newLog, mealLogs: db.mealLogs });
+        }
+
         next();
       });
     }

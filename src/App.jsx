@@ -18,6 +18,7 @@ import {
   Map,
   List,
   Shield,
+  Ticket,
   X,
   ExternalLink,
   ChevronUp
@@ -45,6 +46,7 @@ export default function App() {
   const [mobileTab, setMobileTab] = useState('list');
   // 관리자 모드 토글 및 로그인 모달
   const [isAdminMode, setIsAdminMode] = useState(false);
+  const [adminTab, setAdminTab] = useState('all');
   const [showLoginModal, setShowLoginModal] = useState(false);
   // 모바일에서 상세 모달 열기
   const [showMobileDetailModal, setShowMobileDetailModal] = useState(false);
@@ -83,7 +85,7 @@ export default function App() {
       const matchCategory =
         selectedCategory === '전체' || r.category === selectedCategory;
 
-      // 직접 검증 TOP 14 필터
+      // 직접 검증 맛집 필터
       const matchTopPick = !onlyTopPicks || r.verifiedByUser || r.isTopPick;
 
       // 검색어 필터
@@ -102,6 +104,11 @@ export default function App() {
       return matchCategory && matchTopPick && matchSearch && hasBudgetMenu;
     });
   }, [restaurants, selectedCategory, onlyTopPicks, searchQuery, budgetLimit]);
+
+  // 검증 맛집 개수
+  const topPicksCount = useMemo(() => {
+    return restaurants.filter((r) => r.verifiedByUser || r.isTopPick).length;
+  }, [restaurants]);
 
   // 가격 업데이트 핸들러
   const handleUpdatePrice = (updatedItem, logSummary) => {
@@ -128,8 +135,9 @@ export default function App() {
     }
   };
 
-  // 관리자 모드 열기 핸들러 (인증 여부 확인)
-  const handleOpenAdmin = () => {
+  // 관리자 모드 열기 핸들러 (인증 여부 확인 및 탭 지정)
+  const handleOpenAdmin = (tab = 'all') => {
+    setAdminTab(tab);
     const isAuth = sessionStorage.getItem('moran_admin_authenticated') === 'true';
     if (isAuth) {
       setIsAdminMode(true);
@@ -149,6 +157,7 @@ export default function App() {
     return (
       <AdminDashboard
         restaurants={restaurants}
+        initialTab={adminTab}
         onUpdateRestaurants={(newList) => {
           setRestaurants([...newList]);
           if (newList.length > 0 && (!selectedRestaurant || !newList.find(r => r.id === selectedRestaurant.id))) {
@@ -206,9 +215,20 @@ export default function App() {
             <span>식당 추가</span>
           </button>
 
+          {/* 식권 명단 관리 바로가기 */}
+          <button
+            onClick={() => handleOpenAdmin('mealTickets')}
+            className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300/80 rounded-xl text-xs font-bold transition active:scale-95"
+            title="식권 명단 관리 (관리자 전용)"
+          >
+            <Ticket className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="hidden sm:inline">식권 명단</span>
+            <span className="sm:hidden text-[11px]">식권</span>
+          </button>
+
           {/* 관리자 모드 버튼 */}
           <button
-            onClick={handleOpenAdmin}
+            onClick={() => handleOpenAdmin('all')}
             className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 bg-stone-100 hover:bg-stone-200 text-stone-700 rounded-xl text-xs font-bold border border-stone-300/80 transition"
             title="관리자 페이지"
           >
@@ -287,7 +307,7 @@ export default function App() {
               )}
         </div>
 
-            {/* 필터 칩: TOP 14 검증 맛집 토글 & 예산 조절 */}
+            {/* 필터 칩: 검증 맛집 토글 & 예산 조절 */}
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setOnlyTopPicks(!onlyTopPicks)}
@@ -298,7 +318,7 @@ export default function App() {
                 }`}
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>검증 TOP 14만 보기</span>
+                <span>검증 맛집만 보기 ({topPicksCount})</span>
               </button>
 
               <div className="px-2.5 py-1.5 bg-white border border-stone-200 rounded-xl text-xs font-bold text-stone-700 flex items-center gap-1 shrink-0">

@@ -23,23 +23,26 @@ import {
   Clock,
   AlertTriangle,
   LogOut,
-  Bell
+  Bell,
+  Ticket
 } from 'lucide-react';
 import { storageService } from '../services/storageService';
 import { CATEGORIES } from '../data/initialRestaurants';
 import PriceUpdateModal from './PriceUpdateModal';
 import AddRestaurantModal from './AddRestaurantModal';
 import TelegramConfigModal from './TelegramConfigModal';
+import MealTicketManager from './MealTicketManager';
 
 export default function AdminDashboard({
   restaurants = [],
   onUpdateRestaurants = () => {},
   onCloseAdmin = () => {},
-  onLogout = () => {}
+  onLogout = () => {},
+  initialTab = 'all'
 }) {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('전체');
-  const [selectedTab, setSelectedTab] = useState('all'); // all, verified, unverified, requests
+  const [selectedTab, setSelectedTab] = useState(initialTab); // all, verified, unverified, requests, mealTickets
   const [requests, setRequests] = useState([]);
   const [loadingRequests, setLoadingRequests] = useState(false);
 
@@ -320,7 +323,7 @@ export default function AdminDashboard({
 
           <div className="bg-slate-800/80 border border-orange-500/30 rounded-2xl p-3 sm:p-4 flex flex-col justify-between bg-gradient-to-br from-orange-500/10 to-transparent">
             <div className="flex items-center justify-between">
-              <span className="text-[11px] sm:text-xs font-medium text-orange-300">검증 TOP 14</span>
+              <span className="text-[11px] sm:text-xs font-medium text-orange-300">검증 맛집 (TOP픽)</span>
               <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-orange-400" />
             </div>
             <div className="mt-1 sm:mt-2 flex items-baseline gap-1.5">
@@ -414,11 +417,24 @@ export default function AdminDashboard({
               <Inbox className="w-3.5 h-3.5" />
               <span>제보 ({stats.pendingCount})</span>
             </button>
+            <button
+              onClick={() => setSelectedTab('mealTickets')}
+              className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap shrink-0 transition flex items-center gap-1.5 ${
+                selectedTab === 'mealTickets'
+                  ? 'bg-emerald-600 text-white shadow-md font-black'
+                  : 'bg-slate-800 text-slate-400 hover:text-white'
+              }`}
+            >
+              <Ticket className="w-3.5 h-3.5 text-emerald-300" />
+              <span>🎫 식권 명단 관리</span>
+            </button>
           </div>
         </div>
 
-        {/* ===================== [사용자 수정 요청 탭] ===================== */}
-        {selectedTab === 'requests' ? (
+        {/* ===================== [식권 명단 관리 탭] ===================== */}
+        {selectedTab === 'mealTickets' ? (
+          <MealTicketManager restaurants={restaurants} />
+        ) : selectedTab === 'requests' ? (
           <div className="space-y-4">
             <div className="flex items-center justify-between text-xs text-slate-400">
               <p>일반 사용자가 화면에서 제보한 가격 변동/메뉴 수정 요청 목록입니다. 승인 시 DB에 즉시 반영됩니다.</p>

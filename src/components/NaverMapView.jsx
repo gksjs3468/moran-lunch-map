@@ -137,7 +137,7 @@ export default function NaverMapView({
       const themeColor = isSelected
         ? '#ea580c' // 활성 오렌지
         : isTop
-        ? '#1c1917' // 검증 TOP 14 (다크 차콜)
+        ? '#1c1917' // 검증 맛집 (다크 차콜)
         : hasBudgetMenu
         ? '#059669' // 든든한 에메랄드
         : '#64748b'; // 메뉴 미등록 / 기타 (차분한 슬레이트)

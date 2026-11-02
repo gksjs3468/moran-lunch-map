@@ -606,6 +606,173 @@ export const INITIAL_RESTAURANTS = [
     "updatedAt": "2026-10-30"
   },
   {
+    "id": "moran-top-15",
+    "name": "병천아우네순대",
+    "category": "국밥",
+    "address": "경기 성남시 중원구 산성대로80번길 11 1층",
+    "lat": 37.43225,
+    "lng": 127.12805,
+    "phone": "031-754-0828",
+    "naverMapUrl": "https://map.naver.com/p/search/병천아우네순대%20성남",
+    "budgetFriendly": true,
+    "avgPrice": 9000,
+    "rating": 4.6,
+    "isTopPick": true,
+    "verifiedByUser": true,
+    "tags": [
+      "장터순대국",
+      "순대국",
+      "국밥",
+      "착한가격업소",
+      "모란시장"
+    ],
+    "description": "모란시장 인근 착한가격업소! 든든하고 진한 육수의 장터순대국 9,000원.",
+    "menus": [
+      {
+        "id": "m-bcas-1",
+        "name": "장터순대국",
+        "price": 9000,
+        "isRecommended": true,
+        "updatedDate": "2026-11-02"
+      }
+    ],
+    "updatedAt": "2026-11-02"
+  },
+  {
+    "id": "moran-top-16",
+    "name": "시골추어탕매운탕",
+    "category": "국밥",
+    "address": "경기 성남시 중원구 산성대로80번길 18 1층 102호",
+    "lat": 37.43215,
+    "lng": 127.128,
+    "phone": "031-755-6677",
+    "naverMapUrl": "https://map.naver.com/p/search/시골추어탕매운탕%20성남",
+    "budgetFriendly": true,
+    "avgPrice": 8750,
+    "rating": 4.5,
+    "isTopPick": true,
+    "verifiedByUser": true,
+    "tags": [
+      "통추어탕",
+      "갈은추어탕",
+      "소내장탕",
+      "소한마리탕",
+      "모란시장"
+    ],
+    "description": "모란시장 골목의 든든한 보양탕 전문점! 통추어탕 9천원, 소내장탕 8천원 등 갓성비 탕 요리.",
+    "menus": [
+      {
+        "id": "m-sgct-1",
+        "name": "통추어탕",
+        "price": 9000,
+        "isRecommended": true,
+        "updatedDate": "2026-11-02"
+      },
+      {
+        "id": "m-sgct-2",
+        "name": "갈은 추어탕",
+        "price": 9000,
+        "isRecommended": true,
+        "updatedDate": "2026-11-02"
+      },
+      {
+        "id": "m-sgct-3",
+        "name": "소내장탕",
+        "price": 8000,
+        "isRecommended": true,
+        "updatedDate": "2026-11-02"
+      },
+      {
+        "id": "m-sgct-4",
+        "name": "소한마리탕",
+        "price": 9000,
+        "isRecommended": false,
+        "updatedDate": "2026-11-02"
+      }
+    ],
+    "updatedAt": "2026-11-02"
+  },
+  {
+    "id": "moran-top-17",
+    "name": "전주식당",
+    "category": "한식",
+    "address": "경기 성남시 중원구 산성대로80번길 5",
+    "lat": 37.43235,
+    "lng": 127.1281,
+    "phone": "031-751-3221",
+    "naverMapUrl": "https://map.naver.com/p/search/전주식당%20성남동",
+    "budgetFriendly": true,
+    "avgPrice": 7000,
+    "rating": 4.5,
+    "isTopPick": true,
+    "verifiedByUser": true,
+    "tags": [
+      "순두부백반",
+      "부대찌개",
+      "백반",
+      "가성비",
+      "실제가격비교필요"
+    ],
+    "description": "모란시장 골목 가성비 백반 맛집. 순두부백반 6,000원, 부대찌개 8,000원 (실제 가격 비교 및 확인 필요).",
+    "menus": [
+      {
+        "id": "m-jjsd-1",
+        "name": "순두부백반",
+        "price": 6000,
+        "isRecommended": true,
+        "updatedDate": "2026-11-02"
+      },
+      {
+        "id": "m-jjsd-2",
+        "name": "부대찌개",
+        "price": 8000,
+        "isRecommended": true,
+        "updatedDate": "2026-11-02"
+      }
+    ],
+    "updatedAt": "2026-11-02"
+  },
+  {
+    "id": "moran-top-18",
+    "name": "홍콩반점0410 모란시장점",
+    "category": "중식",
+    "address": "경기 성남시 중원구 둔촌대로 101 월드팰리스 1층",
+    "lat": 37.4297769,
+    "lng": 127.1304856,
+    "phone": "031-755-0410",
+    "naverMapUrl": "https://map.naver.com/p/search/홍콩반점0410%20모란시장점",
+    "budgetFriendly": true,
+    "avgPrice": 8000,
+    "rating": 4.4,
+    "isTopPick": true,
+    "verifiedByUser": true,
+    "tags": [
+      "짜장면",
+      "짬뽕",
+      "중식",
+      "모란시장",
+      "가성비"
+    ],
+    "description": "모란시장 사거리 월드팰리스 1층. 믿고 먹는 짜장면 7,000원, 불맛 짬뽕 9,000원.",
+    "menus": [
+      {
+        "id": "m-hkbj-1",
+        "name": "짜장면",
+        "price": 7000,
+        "isRecommended": true,
+        "updatedDate": "2026-11-02"
+      },
+      {
+        "id": "m-hkbj-2",
+        "name": "짬뽕",
+        "price": 9000,
+        "isRecommended": true,
+        "updatedDate": "2026-11-02"
+      }
+    ],
+    "updatedAt": "2026-11-02"
+  },
+  {
     "id": "scraped-1962405716",
     "name": "엄마의밥상",
     "category": "백반",
@@ -762,51 +929,6 @@ export const INITIAL_RESTAURANTS = [
     "updatedAt": "2026-10-30"
   },
   {
-    "id": "scraped-916142308",
-    "name": "더진국수육국밥 모란역점",
-    "category": "국밥",
-    "address": "성남대로1130번길 3 엠스퀘어빌딩",
-    "lat": 37.4307126,
-    "lng": 127.1299303,
-    "phone": "031-723-9882",
-    "naverMapUrl": "https://map.naver.com/p/entry/place/916142308",
-    "imageUrl": "https://ldb-phinf.pstatic.net/20200418_222/1587150844959TWHe6_JPEG/6DoU-9iNbG7psIkYa89xWEKx.jpeg.jpg",
-    "reviewCount": 313,
-    "budgetFriendly": true,
-    "avgPrice": null,
-    "rating": 4.4,
-    "isTopPick": false,
-    "verifiedByUser": false,
-    "needsVerification": false,
-    "tags": [
-      "국밥",
-      "네이버스크랩",
-      "현장확인필요"
-    ],
-    "description": "모란역 2번 출구 인근. 잡내 없이 진한 사골 육수의 수육국밥과 순대국 맛집.",
-    "menus": [
-      {
-        "id": "m-dj-1",
-        "name": "진국 수육국밥",
-        "price": 9000,
-        "isRecommended": true
-      },
-      {
-        "id": "m-dj-2",
-        "name": "얼큰 순대국밥",
-        "price": 9000,
-        "isRecommended": true
-      },
-      {
-        "id": "m-dj-3",
-        "name": "직화냉면",
-        "price": 8500,
-        "isRecommended": true
-      }
-    ],
-    "updatedAt": "2026-10-30"
-  },
-  {
     "id": "scraped-1980889797",
     "name": "찌개랑 밥이랑 태평역 본점",
     "category": "한식",
@@ -856,45 +978,6 @@ export const INITIAL_RESTAURANTS = [
     ],
     "description": "네이버 지도 등록 기준 정보입니다. (성남대로1221번길 12 1층 이가네수라간) 실제 매장 방문 시 메뉴/가격 확인이 필요합니다.",
     "menus": [],
-    "updatedAt": "2026-10-30"
-  },
-  {
-    "id": "scraped-31661008",
-    "name": "한성뚝배기 본점",
-    "category": "한식",
-    "address": "둔촌대로 101 월드팰리스 202호 전체",
-    "lat": 37.4297769,
-    "lng": 127.1304856,
-    "phone": "031-751-6631",
-    "naverMapUrl": "https://map.naver.com/p/entry/place/31661008",
-    "imageUrl": "https://ldb-phinf.pstatic.net/20220111_226/1641900042307DBWya_JPEG/%C7%D1%BC%BAok.jpg",
-    "reviewCount": 804,
-    "budgetFriendly": true,
-    "avgPrice": null,
-    "rating": 4.4,
-    "isTopPick": false,
-    "verifiedByUser": false,
-    "needsVerification": false,
-    "tags": [
-      "한식",
-      "네이버스크랩",
-      "현장확인필요"
-    ],
-    "description": "모란역 월드팰리스 2층. 오랜 전통의 진한 사골 순대국 전문점.",
-    "menus": [
-      {
-        "id": "m-hs-1",
-        "name": "한성 순대국",
-        "price": 8000,
-        "isRecommended": true
-      },
-      {
-        "id": "m-hs-2",
-        "name": "얼큰 순대국",
-        "price": 9000,
-        "isRecommended": true
-      }
-    ],
     "updatedAt": "2026-10-30"
   },
   {
@@ -1157,51 +1240,6 @@ export const INITIAL_RESTAURANTS = [
     "updatedAt": "2026-10-30"
   },
   {
-    "id": "scraped-13065100",
-    "name": "동대문엽기떡볶이 모란점",
-    "category": "분식",
-    "address": "성남대로 1155 2층",
-    "lat": 37.4330349,
-    "lng": 127.128671,
-    "phone": "031-751-8592",
-    "naverMapUrl": "https://map.naver.com/p/entry/place/13065100",
-    "imageUrl": "https://ldb-phinf.pstatic.net/20260219_83/1771479103438Pr53Y_PNG/%BF%B1%B1%E2%B6%B1%BA%BA%C0%CC_%B4%EB%C7%A5_%C0%CC%B9%CC%C1%F6.png",
-    "reviewCount": 1,
-    "budgetFriendly": true,
-    "avgPrice": null,
-    "rating": 4.4,
-    "isTopPick": false,
-    "verifiedByUser": false,
-    "needsVerification": false,
-    "tags": [
-      "분식",
-      "네이버스크랩",
-      "현장확인필요"
-    ],
-    "description": "모란역 1번 출구 인근. 가성비 좋은 2인 엽떡과 주먹밥.",
-    "menus": [
-      {
-        "id": "m-yp-1",
-        "name": "2인 엽기떡볶이",
-        "price": 9000,
-        "isRecommended": true
-      },
-      {
-        "id": "m-yp-2",
-        "name": "참치마요밥",
-        "price": 3500,
-        "isRecommended": true
-      },
-      {
-        "id": "m-yp-3",
-        "name": "주먹김밥",
-        "price": 2500,
-        "isRecommended": true
-      }
-    ],
-    "updatedAt": "2026-10-30"
-  },
-  {
     "id": "scraped-2056026789",
     "name": "두끼 성남모란점",
     "category": "분식",
@@ -1357,39 +1395,6 @@ export const INITIAL_RESTAURANTS = [
         "id": "m-ch-2",
         "name": "해물짬뽕",
         "price": 9000,
-        "isRecommended": true
-      }
-    ],
-    "updatedAt": "2026-10-30"
-  },
-  {
-    "id": "scraped-2024617943",
-    "name": "짬뽕관 모란역점",
-    "category": "중식",
-    "address": "성남대로1148번길 16 1층",
-    "lat": 37.4325142,
-    "lng": 127.1308941,
-    "phone": "",
-    "naverMapUrl": "https://map.naver.com/p/entry/place/2024617943",
-    "imageUrl": "https://ldb-phinf.pstatic.net/20251203_102/1764726676764L4KWV_PNG/KakaoTalk_20220801_100657740.png",
-    "reviewCount": 996,
-    "budgetFriendly": true,
-    "avgPrice": null,
-    "rating": 4.4,
-    "isTopPick": false,
-    "verifiedByUser": false,
-    "needsVerification": false,
-    "tags": [
-      "중식당",
-      "네이버스크랩",
-      "현장확인필요"
-    ],
-    "description": "모란역 맛고을거리. 불향 가득한 짜장면과 함께 셀프바 공기밥이 무료 제공되는 든든한 밥집.",
-    "menus": [
-      {
-        "id": "m-jp-1",
-        "name": "명품 짜장면 (공기밥무료)",
-        "price": 7500,
         "isRecommended": true
       }
     ],
@@ -1760,45 +1765,6 @@ export const INITIAL_RESTAURANTS = [
     "updatedAt": "2026-10-30"
   },
   {
-    "id": "scraped-2084437708",
-    "name": "분분 성남모란점",
-    "category": "기타",
-    "address": "성남대로 1132 모란역 센트럴스퀘어 1층 121호 분분 성남모란점",
-    "lat": 37.4310123,
-    "lng": 127.1301072,
-    "phone": "",
-    "naverMapUrl": "https://map.naver.com/p/entry/place/2084437708",
-    "imageUrl": "https://ldb-phinf.pstatic.net/20260507_14/17781473571569oS6d_JPEG/IMG_2600.jpg",
-    "reviewCount": 337,
-    "budgetFriendly": true,
-    "avgPrice": null,
-    "rating": 4.4,
-    "isTopPick": false,
-    "verifiedByUser": false,
-    "needsVerification": false,
-    "tags": [
-      "베트남음식",
-      "네이버스크랩",
-      "현장확인필요"
-    ],
-    "description": "모란 센트럴스퀘어 1층. 겉바속촉 바게트에 고기와 야채가 풍성한 베트남 반미 샌드위치 맛집.",
-    "menus": [
-      {
-        "id": "m-bb-1",
-        "name": "베트남 반미 샌드위치",
-        "price": 8000,
-        "isRecommended": true
-      },
-      {
-        "id": "m-bb-2",
-        "name": "짜조 (바삭튀김만두)",
-        "price": 6000,
-        "isRecommended": true
-      }
-    ],
-    "updatedAt": "2026-10-30"
-  },
-  {
     "id": "scraped-33305834",
     "name": "등갈비달인 모란 본점",
     "category": "육류",
@@ -1903,5 +1869,3 @@ export const INITIAL_RESTAURANTS = [
     "updatedAt": "2026-10-30"
   }
 ];
-
-export const initialRestaurants = INITIAL_RESTAURANTS;
